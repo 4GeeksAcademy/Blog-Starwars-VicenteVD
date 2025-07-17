@@ -1,16 +1,15 @@
-// src/context/actions.js
-
-// Tipos de acción
 export const ADD_FAVORITE    = "ADD_FAVORITE";
 export const REMOVE_FAVORITE = "REMOVE_FAVORITE";
 
 // Creadores de acción
-export const addFavorite = (entity) => ({
+// addFavorite recibe el objeto mínimo { id, name, entityType }
+export const addFavorite = (favorite) => ({
   type: ADD_FAVORITE,
-  payload: entity,
+  payload: favorite,
 });
 
-export const removeFavorite = (entityId) => ({
+// removeFavorite recibe id y entityType por separado
+export const removeFavorite = (id, entityType) => ({
   type: REMOVE_FAVORITE,
-  payload: entityId,
+  payload: { id, entityType },
 });

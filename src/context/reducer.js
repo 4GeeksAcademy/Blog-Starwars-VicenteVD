@@ -1,16 +1,20 @@
-// src/context/reducer.js
-
 import { ADD_FAVORITE, REMOVE_FAVORITE } from "./actions";
 
 const initialState = {
-  favorites: [],  // aquí almacenaremos los elementos guardados
+  favorites: [],
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_FAVORITE:
-      // Evitamos duplicados
-      if (state.favorites.some(item => item.id === action.payload.id)) {
+      // Evitamos duplicados por id + tipo
+      if (
+        state.favorites.some(
+          fav =>
+            fav.id === action.payload.id &&
+            fav.entityType === action.payload.entityType
+        )
+      ) {
         return state;
       }
       return {
@@ -21,7 +25,13 @@ function reducer(state = initialState, action) {
     case REMOVE_FAVORITE:
       return {
         ...state,
-        favorites: state.favorites.filter(item => item.id !== action.payload),
+        favorites: state.favorites.filter(
+          fav =>
+            !(
+              fav.id === action.payload.id &&
+              fav.entityType === action.payload.entityType
+            )
+        ),
       };
 
     default:

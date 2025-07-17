@@ -1,22 +1,26 @@
 import React, { useContext } from "react";
-import { StoreContext } from "../context/StoreContext";
+import { StoreContext }   from "../context/StoreContext";
 import { addFavorite, removeFavorite } from "../context/actions";
 
-const FavoriteButton = ({ item }) => {
+const FavoriteButton = ({ id, name, entityType }) => {
   const { state, dispatch } = useContext(StoreContext);
-  const isFav = state.favorites.some(fav => fav.id === item.id);
+
+  // Comprobamos existencia por id + tipo
+  const isFav = state.favorites.some(
+    fav => fav.id === id && fav.entityType === entityType
+  );
 
   const handleClick = () => {
     if (isFav) {
-      dispatch(removeFavorite(item.id));
+      dispatch(removeFavorite(id, entityType));
     } else {
-      dispatch(addFavorite(item));
+      dispatch(addFavorite({ id, name, entityType }));
     }
   };
 
   return (
-    <button 
-      className={`btn btn-sm ${isFav ? "btn-danger" : "btn-outline-success"}`} 
+    <button
+      className={`btn btn-sm ${isFav ? "btn-danger" : "btn-outline-success"}`}
       onClick={handleClick}
     >
       {isFav ? "❌ Quitar" : "✅ Favorito"}

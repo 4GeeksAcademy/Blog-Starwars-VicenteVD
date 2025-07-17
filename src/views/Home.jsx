@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <div className="container">
       {/* Sección Personajes */}
-      <section className="mb-5">
+      <section className="mb-5 bg-light rounded border border-secondary p-3">
         <h2>
           <Link to="/people" className="text-decoration-none text-dark">
             Personajes
@@ -51,7 +51,7 @@ const Home = () => {
       </section>
 
       {/* Sección Planetas */}
-      <section className="mb-5">
+      <section className="mb-5 bg-light rounded border border-secondary p-3 ">
         <h2>
           <Link to="/planets" className="text-decoration-none text-dark">
             Planetas
@@ -67,7 +67,7 @@ const Home = () => {
       </section>
 
       {/* Sección Vehículos */}
-      <section className="mb-5">
+      <section className="mb-5 bg-light rounded border border-secondary p-3">
         <h2>
           <Link to="/vehicles" className="text-decoration-none text-dark">
             Vehículos

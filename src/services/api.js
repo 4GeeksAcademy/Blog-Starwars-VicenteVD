@@ -1,9 +1,12 @@
 const API_BASE = "https://www.swapi.tech/api";
 
-// Usamos GitHub Pages del repo breatheco-de/swapi-images
+// Usamos el GitHub Pages del repo breatheco-de/swapi-images
 const IMG_BASE = "https://breatheco-de.github.io/swapi-images/assets/img";
 
-async function fetchResource(url) {
+/**
+ * Helper para peticiones GET
+ */
+export async function fetchResource(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Error ${res.status} al obtener ${url}`);
   const json = await res.json();
@@ -45,12 +48,12 @@ export async function getEntityDetail(type, id) {
   };
 }
 
-export const getPerson  = (id) => getEntityDetail("people", id);
-export const getPlanet  = (id) => getEntityDetail("planets", id);
-export const getVehicle = (id) => getEntityDetail("vehicles", id);
+export const getPerson  = id => getEntityDetail("people", id);
+export const getPlanet  = id => getEntityDetail("planets", id);
+export const getVehicle = id => getEntityDetail("vehicles", id);
 
 // ----------------------
-// URL de imagen
+// Construcción de URL de imagen
 // ----------------------
 export function getImageUrl(type, id) {
   let folder;
@@ -62,7 +65,7 @@ export function getImageUrl(type, id) {
       folder = "planets";
       break;
     case "vehicles":
-      // en el repo de imágenes los vehículos están en la carpeta "starships"
+      // en este repo los vehículos están en la carpeta 'starships'
       folder = "starships";
       break;
     default:
