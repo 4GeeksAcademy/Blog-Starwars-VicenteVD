@@ -1,11 +1,9 @@
 const API_BASE = "https://www.swapi.tech/api";
 
-// Usamos el GitHub Pages del repo breatheco-de/swapi-images
-const IMG_BASE = "https://breatheco-de.github.io/swapi-images/assets/img";
 
-/**
- * Helper para peticiones GET
- */
+const IMG_BASE = "https://github.com/breatheco-de/swapi-images/tree/master/public/images";
+
+
 export async function fetchResource(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Error ${res.status} al obtener ${url}`);
@@ -13,9 +11,7 @@ export async function fetchResource(url) {
   return json;
 }
 
-// ----------------------
-// Listados paginados
-// ----------------------
+
 export async function getPeople(page = 1, limit = 10) {
   const url = `${API_BASE}/people?page=${page}&limit=${limit}`;
   const { results } = await fetchResource(url);
@@ -34,9 +30,7 @@ export async function getVehicles(page = 1, limit = 10) {
   return results.map(({ uid, name }) => ({ id: uid, name }));
 }
 
-// ----------------------
-// Detalle de entidad
-// ----------------------
+
 export async function getEntityDetail(type, id) {
   const url = `${API_BASE}/${type}/${id}`;
   const { result } = await fetchResource(url);
@@ -52,20 +46,18 @@ export const getPerson  = id => getEntityDetail("people", id);
 export const getPlanet  = id => getEntityDetail("planets", id);
 export const getVehicle = id => getEntityDetail("vehicles", id);
 
-// ----------------------
-// Construcción de URL de imagen
-// ----------------------
+
 export function getImageUrl(type, id) {
   let folder;
   switch (type) {
     case "people":
-      folder = "characters";
+      folder = "people";
       break;
     case "planets":
       folder = "planets";
       break;
     case "vehicles":
-      // en este repo los vehículos están en la carpeta 'starships'
+      
       folder = "starships";
       break;
     default:
@@ -74,15 +66,3 @@ export function getImageUrl(type, id) {
   return `${IMG_BASE}/${folder}/${id}.jpg`;
 }
 
-// ----------------------
-// Búsqueda con autocomplete
-// ----------------------
-export async function searchEntities(type, query, limit = 5) {
-  const url = `${API_BASE}/${type}/?name=${encodeURIComponent(query)}&limit=${limit}`;
-  const { results } = await fetchResource(url);
-  return results.map(({ uid, name }) => ({
-    id: uid,
-    name,
-    entityType: type,
-  }));
-}

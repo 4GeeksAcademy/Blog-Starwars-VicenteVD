@@ -34,7 +34,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          {/* Dropdown de Favoritos */}
+          
           <div className="nav-item dropdown">
             <button
               className="btn btn-outline-warning dropdown-toggle"
@@ -69,7 +69,7 @@ const Navbar = () => {
                 ))
               )}
 
-              {/* Separador y botón Ver más */}
+              
               <li><hr className="dropdown-divider" /></li>
               <li>
                 <Link className="dropdown-item text-center" to="/favorites">

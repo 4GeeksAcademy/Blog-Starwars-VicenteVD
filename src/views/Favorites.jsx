@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../context/StoreContext";
-import EntityGrid from "../components/EntityGrid";
+import EntityCard    from "../components/EntityCard";
 
 const Favorites = () => {
   const { state } = useContext(StoreContext);
@@ -14,10 +14,10 @@ const Favorites = () => {
         <div className="row">
           {state.favorites.map(fav => (
             <div key={`${fav.entityType}-${fav.id}`} className="col-sm-6 col-md-4 col-lg-3 mb-4">
-              {/* Aquí sí pasamos entityType explícito */}
-              <EntityGrid 
-                items={[fav]} 
-                entityType={fav.entityType} 
+              <EntityCard 
+                item={fav} 
+                entityType={fav.entityType}  
+                showDetails={false}          
               />
             </div>
           ))}
