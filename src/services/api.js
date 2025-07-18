@@ -1,7 +1,7 @@
 const API_BASE = "https://www.swapi.tech/api";
 
 
-const IMG_BASE = "https://github.com/breatheco-de/swapi-images/tree/master/public/images";
+const IMG_BASE = "https://raw.githubusercontent.com/breatheco-de/swapi-images/refs/heads/master/public/images/";
 
 
 export async function fetchResource(url) {
@@ -42,26 +42,25 @@ export async function getEntityDetail(type, id) {
   };
 }
 
-export const getPerson  = id => getEntityDetail("people", id);
-export const getPlanet  = id => getEntityDetail("planets", id);
+export const getPerson = id => getEntityDetail("people", id);
+export const getPlanet = id => getEntityDetail("planets", id);
 export const getVehicle = id => getEntityDetail("vehicles", id);
 
 
 export function getImageUrl(type, id) {
   let folder;
-  switch (type) {
-    case "people":
-      folder = "people";
-      break;
-    case "planets":
-      folder = "planets";
-      break;
-    case "vehicles":
-      
-      folder = "starships";
-      break;
-    default:
-      folder = type;
+    switch (type) {
+      case "people":
+        folder = "people";
+        break;
+      case "planets":
+        folder = "planets";
+        break;
+      case "vehicles":
+        folder = "vehicles";
+        break;
+      default:
+        folder = type;
   }
   return `${IMG_BASE}/${folder}/${id}.jpg`;
 }
